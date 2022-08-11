@@ -1,0 +1,11 @@
+{% include 'main.html' %}
+
+
+{% block content %}
+
+    <form action="">
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}
