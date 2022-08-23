@@ -4,8 +4,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
-
 # Create your views here.
+from base.models import Topic
+
 
 def loginPage(request):
     page = 'login'
@@ -53,3 +54,12 @@ def registerUser(request):
             messages.error(request, 'An Error occured during registration')
     context = {'form': form}
     return render(request, 'registration/register.html', context)
+
+
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+    rooms = user.room_set.all()
+    room_message = user.message_set.all()
+    topics = Topic.objects.all()
+    context = {'user': user, 'rooms': rooms, 'room_message': room_message, 'topics': topics}
+    return render(request, 'profile.html', context)
