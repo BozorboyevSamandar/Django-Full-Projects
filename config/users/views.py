@@ -1,11 +1,14 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from base.models import Topic
+from .forms import UserForm
+
 
 # Create your views here.
-from base.models import Topic
 
 
 def loginPage(request):
@@ -53,7 +56,7 @@ def registerUser(request):
         else:
             messages.error(request, 'An Error occured during registration')
     context = {'form': form}
-    return render(request, 'registration/register.html', context)
+    return render(request, 'registration/register_old.html', context)
 
 
 def userProfile(request, pk):
@@ -63,3 +66,16 @@ def userProfile(request, pk):
     topics = Topic.objects.all()
     context = {'user': user, 'rooms': rooms, 'room_message': room_message, 'topics': topics}
     return render(request, 'profile.html', context)
+
+
+@login_required(login_url='login')
+def userUpdate(request, pk):
+    user = request.user
+    form = UserForm(instance=user)
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            redirect('user-profile', pk=user.id)
+    context = {'form': form}
+    return render(request, 'update-user.html', context)
