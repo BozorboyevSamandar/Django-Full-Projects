@@ -28,7 +28,7 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('register')
         else:
             messages.error(request, "Username OR password does not exits")
 
