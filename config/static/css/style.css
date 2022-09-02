@@ -2,6 +2,7 @@
 
 :root {
   --color-main: #71c6dd;
+  --color-bg-yellow: #fcd800;
   --color-main-light: #e1f6fb;
   --color-dark: #3f4156;
   --color-dark-medium: #51546e;
@@ -95,7 +96,7 @@ a {
 }
 
 .btn--main {
-  background-color: var(--color-main);
+  background-color: var(--color-bg-yellow);
   color: var(--color-dark);
 }
 
@@ -720,7 +721,8 @@ a {
 
 .roomListRoom__topic {
   padding: 5px 1.5rem;
-  background-color: var(--color-dark-medium);
+  background-color: var(--color-bg-yellow);
+  color: #000;
   border-radius: 5rem;
   font-weight: 500;
   font-size: 1.3rem;
