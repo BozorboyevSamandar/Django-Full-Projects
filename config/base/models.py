@@ -19,6 +19,10 @@ class Room(models.Model):
     participants = models.ManyToManyField(User, related_name='participants', blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    views = models.ManyToManyField(User, related_name='room_views')
+
+    def count_views(self):
+        return self.views.count()
 
     def __str__(self):
         return self.name

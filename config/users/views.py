@@ -28,7 +28,7 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            return redirect('register')
+            return redirect('home')
         else:
             messages.error(request, "Username OR password does not exits")
 
@@ -51,7 +51,7 @@ def registerUser(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            return redirect('home')
+            return redirect('login')
         else:
             messages.error(request, 'An Error occured during registration')
     context = {'form': form}
